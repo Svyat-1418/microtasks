@@ -1,27 +1,27 @@
 import React from "react";
-import {TopCarsType} from "./App";
+import {FilterType, MoneyType} from "./App";
 
 type PropsType = {
-    topCars: Array<TopCarsType>
+    currentMoney: Array<MoneyType>
+    filterMoney: (banknoteNane: FilterType) => void
 }
 
 export const NewComponent = (props: PropsType) => {
     return (
-        <table>
-            <thead>
-            <tr>
-                <th>Manufacture</th>
-                <th>Model</th>
-            </tr>
-            </thead>
-            <tbody>
-            {props.topCars.map((car, index) => {
-                return <tr key={index}>
-                    <td>{car.manufacturer}</td>
-                    <td>{car.model}</td>
-                </tr>
-            })}
-            </tbody>
-        </table>
+        <>
+            <ul>
+                {props.currentMoney.map((objMoney, index) => <li key={index}>
+                    <span>{objMoney.banknotes}</span>
+                    <span>{objMoney.value}</span>
+                    <span>{objMoney.number}</span>
+                </li>)}
+            </ul>
+
+            <div>
+                <button onClick={() => props.filterMoney("ALL")}>ALL</button>
+                <button onClick={() => props.filterMoney("RUBLES")}>RUBLES</button>
+                <button onClick={() => props.filterMoney("DOLLARS")}>DOLLARS</button>
+            </div>
+        </>
     )
 }
